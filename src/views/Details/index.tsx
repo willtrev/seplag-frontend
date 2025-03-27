@@ -1,13 +1,29 @@
 import { useFetchData } from "@/hooks/useFetchData";
+import { handleDateFormat } from "@/utils/handleDateFormat";
 import { useParams } from "react-router-dom";
+
+export type Pessoa = {
+  id: number;
+  nome: string;
+  idade: string | number;
+  urlFoto: string;
+  ultimaOcorrencia: {
+    dtDesaparecimento: string;
+    dataLocalizacao: string | null;
+    encontradoVivo: boolean;
+    localDesaparecimentoConcat: string;
+    ocorrenciaEntrevDesapDTO: {
+      informacao: string;
+      vestimentasDesaparecido: string;
+    };
+  };
+};
 
 export default function Details() {
   const { id } = useParams();
-  console.log(id);
+  const { data } = useFetchData<Pessoa>(`pessoa-${id}`, `/v1/pessoas/${id}`);
 
-  const { data } = useFetchData(`pessoa-${id}`, `/v1/pessoas/${id}`);
-
-  console.log({ data });
+  const notFound = !data?.ultimaOcorrencia.dataLocalizacao;
 
   return (
     <div className="max-w-[1200px] mx-auto">
@@ -17,9 +33,49 @@ export default function Details() {
 
       <h2 className="text-lg mt-4 text-center mb-4 font-medium">Detalhes</h2>
 
-      <div className="flex gap-4 justify-center flex-wrap max-h-[330px] overflow-hidden"></div>
+      <div className="flex flex-col items-center gap-4">
+        <img
+          src={data?.urlFoto}
+          className="bg-gray-300 min-w-36 w-auto h-48 rounded-sm"
+        />
+        <h2
+          data-located={!notFound}
+          className="font-medium w-fit text-lg px-2.5 py-0.5 rounded-full bg-red-700 
+                text-white self-center text-center data-[located=true]:bg-green-700"
+        >
+          {notFound ? "Desaparecido" : "Encontrado"}
+        </h2>
+        <h3 className="text-xl font-medium">{data?.nome}</h3>
+        <p>{data?.idade as string} anos</p>
+        <p>
+          Desapareceu dia{" "}
+          {data?.ultimaOcorrencia?.dtDesaparecimento &&
+            handleDateFormat(data?.ultimaOcorrencia?.dtDesaparecimento)}
+          , em {data?.ultimaOcorrencia?.localDesaparecimentoConcat}
+        </p>
+        <div className="flex flex-col gap-1 items-center">
+          <span>
+            Ultima vez visto vestindo{" "}
+            {
+              data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                .vestimentasDesaparecido
+            }
+          </span>
+          <span>
+            com a seguinte informação:{" "}
+            {data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO.informacao}
+          </span>
+        </div>
 
-      <h2 className="text-lg mt-4 text-center mb-4 font-medium">Lista</h2>
+        {!notFound && (
+          <p className="font-medium text-lg">
+            Localizado{" "}
+            {data?.ultimaOcorrencia?.encontradoVivo ? "vivo" : "morto"} dia{" "}
+            {data?.ultimaOcorrencia?.dataLocalizacao &&
+              handleDateFormat(data?.ultimaOcorrencia?.dataLocalizacao)}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

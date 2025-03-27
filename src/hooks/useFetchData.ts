@@ -13,12 +13,12 @@ const fetchData = async (endpoint: string, params?: FetchParams) => {
   return data;
 };
 
-export const useFetchData = (
+export const useFetchData = <T>(
   key: string,
   endpoint: string,
   params?: FetchParams,
 ) => {
-  return useQuery({
+  return useQuery<T>({
     queryKey: [key],
     queryFn: () => fetchData(endpoint, params),
   });

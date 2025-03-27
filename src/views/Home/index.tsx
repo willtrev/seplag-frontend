@@ -22,18 +22,22 @@ interface Pessoa {
   };
 }
 
+interface PessoasWithFilter {
+  content: Pessoa[];
+}
+
 export default function Home() {
   const [filter, setFilter] = useState<PessoasFilterProps>({
     pagina: 1,
     porPagina: 10,
   });
-  const { data } = useFetchData(
+  const { data } = useFetchData<PessoasWithFilter>(
     `pessoasbyfilter-${JSON.stringify(filter)}`,
     "/v1/pessoas/aberto/filtro",
     filter
   );
 
-  const { data: dinamic } = useFetchData(
+  const { data: dinamic } = useFetchData<Pessoa[]>(
     `pessoasdinamicas`,
     "/v1/pessoas/aberto/dinamico",
     {
