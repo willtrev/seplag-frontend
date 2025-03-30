@@ -33,7 +33,7 @@ export default function Details() {
 
       <h2 className="text-lg mt-4 text-center mb-4 font-medium">Detalhes</h2>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 text-center">
         <img
           src={data?.urlFoto}
           className="bg-gray-300 min-w-36 w-auto h-48 rounded-sm"

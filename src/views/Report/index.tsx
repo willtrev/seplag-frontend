@@ -49,7 +49,7 @@ export default function Report() {
       informacao: data.informacao,
       descricao: data.descricao,
       data: data.data,
-      ocoId: JSON.stringify((lastReportId || 0) + 1),
+      ocoId: JSON.stringify(lastReportId || 0),
       foto: data.foto[0],
     };
 
@@ -90,7 +90,7 @@ export default function Report() {
         Envio de informações
       </h2>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 text-center">
         <img
           src={data?.urlFoto}
           className="bg-gray-300 min-w-36 w-auto h-48 rounded-sm"
@@ -175,7 +175,8 @@ export default function Report() {
           <button
             type="submit"
             disabled={mutation.isPending}
-            className="bg-blue-500 text-white p-2 rounded-md"
+            data-disabled={mutation.isPending}
+            className="bg-blue-500 text-white p-2 rounded-md cursor-pointer data-[disabled=true]:bg-gray-500 data-[disabled=true]:cursor-default"
           >
             {mutation.isPending ? "Enviando..." : "Enviar"}
           </button>

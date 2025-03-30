@@ -51,9 +51,11 @@ export default function Home() {
         <h1 className="text-xl font-medium">Pessoas desaparecidas - MT</h1>
       </div>
 
-      <h2 className="text-lg mt-4 text-center mb-4 font-medium">Destaques</h2>
+      <h2 className="md:block hidden text-lg mt-4 text-center mb-4 font-medium">
+        Destaques
+      </h2>
 
-      <div className="flex gap-4 justify-center flex-wrap max-h-[330px] overflow-hidden">
+      <div className="md:flex hidden gap-4 justify-center flex-wrap max-h-[330px] overflow-hidden">
         {dinamic?.map((item: Pessoa) => (
           <PersonCard {...item} />
         ))}
@@ -62,7 +64,7 @@ export default function Home() {
       <h2 className="text-lg mt-4 text-center mb-4 font-medium">Lista</h2>
 
       <form
-        className="flex gap-4 border-b border-gray-300 pb-4 mb-4 px-18"
+        className="flex flex-wrap justify-center  gap-4 border-b border-gray-300 pb-4 mb-4 px-18"
         onSubmit={(form) => {
           form.preventDefault();
 
@@ -136,7 +138,7 @@ export default function Home() {
             <option value="LOCALIZADO">Localizado</option>
           </select>
         </label>
-        <button className="h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded cursor-pointer text-sm self-end">
+        <button className="w-[183px] md:w-fit h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded cursor-pointer text-sm self-end">
           Buscar
         </button>
       </form>
