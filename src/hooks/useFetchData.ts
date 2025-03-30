@@ -21,5 +21,8 @@ export const useFetchData = <T>(
   return useQuery<T>({
     queryKey: [key],
     queryFn: () => fetchData(endpoint, params),
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+    refetchOnMount: false,
   });
 };

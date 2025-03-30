@@ -1,6 +1,6 @@
 import { useFetchData } from "@/hooks/useFetchData";
 import { handleDateFormat } from "@/utils/handleDateFormat";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export type Pessoa = {
   id: number;
@@ -53,19 +53,21 @@ export default function Details() {
             handleDateFormat(data?.ultimaOcorrencia?.dtDesaparecimento)}
           , em {data?.ultimaOcorrencia?.localDesaparecimentoConcat}
         </p>
-        <div className="flex flex-col gap-1 items-center">
-          <span>
-            Ultima vez visto vestindo{" "}
-            {
-              data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
-                .vestimentasDesaparecido
-            }
-          </span>
-          <span>
-            com a seguinte informação:{" "}
-            {data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO.informacao}
-          </span>
-        </div>
+        {data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO && (
+          <div className="flex flex-col gap-1 items-center">
+            <span>
+              Ultima vez visto vestindo:{" "}
+              {
+                data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO
+                  ?.vestimentasDesaparecido
+              }
+            </span>
+            <span>
+              Com a seguinte informação:{" "}
+              {data?.ultimaOcorrencia?.ocorrenciaEntrevDesapDTO?.informacao}
+            </span>
+          </div>
+        )}
 
         {!notFound && (
           <p className="font-medium text-lg">
@@ -74,6 +76,15 @@ export default function Details() {
             {data?.ultimaOcorrencia?.dataLocalizacao &&
               handleDateFormat(data?.ultimaOcorrencia?.dataLocalizacao)}
           </p>
+        )}
+
+        {notFound && (
+          <Link
+            to={`/relatorio/${id}`}
+            className="text-white bg-green-500 mt-4 py-2 px-4 rounded-md text-center hover:bg-green-700"
+          >
+            Tenho informações sobre esta pessoa
+          </Link>
         )}
       </div>
     </div>

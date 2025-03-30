@@ -9,7 +9,7 @@ export default function NotFound() {
         Talvez o link esteja incorreto ou a página tenha sido removida.
       </p>
       <a
-        href="/home"
+        href="/inicio"
         className="text-blue-500 mt-4 underline hover:text-blue-700"
       >
         Voltar para a página inicial

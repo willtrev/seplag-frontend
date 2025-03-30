@@ -20,7 +20,7 @@ export default function PersonCard(item: Pessoa) {
       <img
         src={item.urlFoto}
         alt=""
-        className="max-w-full h-[160px] bg-gray-300 rounded-md"
+        className="max-w-full h-[160px] bg-gray-300 rounded-md object-cover"
       />
       <p className="text-xs text-center font-medium">{item.nome}</p>
       <div className="flex flex-col gap-2">
@@ -46,9 +46,12 @@ export default function PersonCard(item: Pessoa) {
         >
           Detalhes
         </Link>
-        <button className="bg-green-500 hover:bg-green-700 text-white font-medium py-1 px-2 rounded cursor-pointer text-xs">
+        <Link
+          to={`/relatorio/${item.id}`}
+          className="bg-green-500 hover:bg-green-700 text-white font-medium py-1 px-2 rounded cursor-pointer text-xs"
+        >
           Enviar Dados
-        </button>
+        </Link>
       </div>
     </div>
   );
