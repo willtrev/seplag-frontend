@@ -1,6 +1,7 @@
+import Pagination from "@/components/Pagination";
 import PersonCard from "@/components/PersonCard";
 import { useFetchData } from "@/hooks/useFetchData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PessoasFilterProps {
   nome?: string;
@@ -24,6 +25,8 @@ interface Pessoa {
 
 interface PessoasWithFilter {
   content: Pessoa[];
+  number?: number;
+  totalPages?: number;
 }
 
 export default function Home() {
@@ -31,6 +34,8 @@ export default function Home() {
     pagina: 1,
     porPagina: 10,
   });
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
   const { data } = useFetchData<PessoasWithFilter>(
     `pessoasbyfilter-${JSON.stringify(filter)}`,
     "/v1/pessoas/aberto/filtro",
@@ -44,6 +49,15 @@ export default function Home() {
       registros: 10,
     }
   );
+
+  useEffect(() => {
+    if (data && data?.totalPages && data?.totalPages !== totalPages) {
+      setTotalPages(data.totalPages);
+    }
+    if (data && data?.number && data?.number !== page) {
+      setPage(data.number);
+    }
+  }, [data, totalPages, page]);
 
   return (
     <div className="max-w-[1200px] mx-auto">
@@ -143,10 +157,23 @@ export default function Home() {
         </button>
       </form>
 
-      <div className="flex gap-4 justify-center flex-wrap">
+      <div
+        data-lastpage={data?.number === (data?.totalPages as number) - 1}
+        className="flex gap-4 justify-center flex-wrap data-[lastpage=false]:min-h-[676px]"
+      >
         {data?.content?.map((item: Pessoa) => (
           <PersonCard {...item} />
         ))}
+      </div>
+
+      <div className="flex justify-center my-8">
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages - 1}
+          onPageChange={(page) => {
+            setFilter({ ...filter, pagina: page });
+          }}
+        />
       </div>
     </div>
   );
