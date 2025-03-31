@@ -1,54 +1,70 @@
-# React + TypeScript + Vite
+# 🚀 Nome do Projeto
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Dados de Inscrição
 
-Currently, two official plugins are available:
+- **Nome:** Willian Trevisan  
+- **E-mail:** [williantrev@gmail.com](mailto:seuemail@email.com)  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Sobre o Projeto
 
-## Expanding the ESLint configuration
+A Polícia Judiciária Civil de Mato Grosso oferece acesso ao cidadão uma API
+de pessoas desaparecidas. Para este teste você deverá implementar uma
+aplicação que possibilita consultar dados dessas pessoas desaparecidas
+bem como enviar eventuais informações sobre elas. Os endpoints estão
+documentados no seguinte link swagger: https://abitus-api.geia.vip/swagger-ui/index.html
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📂 Estrutura do Projeto
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+projeto/
+├── src/                # Código fonte do projeto
+├── public/             # Arquivos públicos
+├── package.json        # Dependências e scripts
+├── README.md           # Documentação
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Como Executar o Projeto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 📌 Requisitos
+- [Node.js](https://nodejs.org/) instalado
+- Gerenciador de pacotes (npm, yarn ou pnpm)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 📦 Instalação
+
+1. Clone o repositório:
+2. Acesse o diretório do projeto:
+3. Instale as dependências:
+   ```bash
+    yarn # ou npm install
+   ```
+
+### ▶️ Executando o Projeto
+
+- Ambiente de desenvolvimento:
+  ```bash
+  yarn dev # ou npm run dev 
+  ```
+
+- Ambiente de produção:
+  ```bash
+  yarn build && yarn preview
+  ```
+
+## 📦 Docker
+
+Para rodar a aplicação em um container Docker:
+```bash
+docker build -t nome-do-app .
+docker run -p 8080:80 nome-do-app
 ```
+
+## 📜 Considerações Finais
+
+- Todas as dependências e arquivos utilizados estão versionados no repositório.
+- Caso tenha dúvidas, entre em contato via e-mail.
+
+---
+
+💡 _Desenvolvido por Willian Trevisan_
+

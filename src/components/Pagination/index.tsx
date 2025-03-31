@@ -10,7 +10,7 @@ export default function Pagination({
 }: PaginationProps) {
   const generatePages = () => {
     const pages: (number | "...")[] = [];
-    const visiblePages = 3;
+    const visiblePages = 1;
 
     if (totalPages <= 6) {
       return Array.from({ length: totalPages }, (_, i) => i + 1);
