@@ -1,4 +1,4 @@
-# 🚀 Nome do Projeto
+# 🚀 Desafio SEPLAG - Front-end
 
 ## 📌 Dados de Inscrição
 
